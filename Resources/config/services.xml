@@ -14,7 +14,7 @@
         <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerIdFormatter</parameter>
         <parameter key="log_stock.formatter.container.template">log_stock.logger.%s</parameter>
 
-        <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\MonologAdapter</parameter>
+        <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\Monolog\MonologAdapter</parameter>
         <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
     </parameters>
 
