@@ -32,8 +32,8 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('loader')->end()
-                ->scalarNode('separator')->end()
+                ->scalarNode('loader')->defaultNull()->end()
+                ->scalarNode('separator')->defaultNull()->end()
                 ->arrayNode('adapters')
                     ->fixXmlConfig('adapter')
                     ->useAttributeAsKey('name')
@@ -50,8 +50,8 @@ class Configuration implements ConfigurationInterface
                                 ->fixXmlConfig('logger')
                                 ->prototype('scalar')->end()
                             ->end()
-                            ->scalarNode('id')->end()
-                            ->scalarNode('channel')->end() // for the default monolog id
+                            ->scalarNode('id')->defaultNull()->end()
+                            ->scalarNode('channel')->defaultNull()->end() // for the default monolog id
                         ->end()
                     ->end()
                 ->end()
