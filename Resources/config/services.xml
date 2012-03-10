@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="log_stock.loader.hierarchy.class">Che\LogStock\Loader\HierarchicalLoggerLoader</parameter>
+        <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\SerivceLocatorLoader</parameter>
+
+        <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\Containerlocator</parameter>
+
+        <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerIdFormatter</parameter>
+        <parameter key="log_stock.formatter.container.template">log_stock.logger.%s</parameter>
+        <parameter key="log_stock.formatter.container.separator">\</parameter>
+
+        <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\MonologAdapter</parameter>
+        <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
+    </parameters>
+
+    <services>
+        <!-- Setup base services -->
+        <service id="log_stock.loader.hierarchy" class="%log_stock.loader.class%">
+            <argument type="service" id="log_stock.loader.hierarchy.child" />
+            <argument>%log_stock.loader.hierarchy.separator%</argument>
+        </service>
+        <service id="log_stock.loader.locator" class="%log_stock.loader.locator.class%">
+            <argument type="service" id="log_stock.loader.locator.container" />
+            <argument type="service" id="log_stock.loader.locator.formatter" />
+        </service>
+
+        <service id="log_stock.container.symfony" class="%log_stock.container.symfony.class%">
+            <argument type="service" id="service_container" />
+        </service>
+
+        <service id="log_stock.formatter.container" class="%log_stock.formatter.container.class%">
+            <argument>%log_stock.formatter.container.template%</argument>
+            <argument>%log_stock.formatter.container.separator%</argument>
+        </service>
+
+        <!-- Alias base services as default dependencies -->
+        <service id="log_stock.loader" alias="log_stock.loader.hierarchy" />
+        <service id="log_stock.loader.hierarchy.child" alias="log_stock.loader.locator" />
+        <service id="log_stock.loader.locator.container" alias="log_stock.container.symfony" />
+        <service id="log_stock.loader.locator.formatter" alias="log_stock.formatter.container" />
+    </services>
+</container>

@@ -1,0 +1,26 @@
+{
+    "name": "che/log-stock-bundle",
+    "description": "The official bundle for LogStock integration",
+    "keywords": ["log", "logging", "logger", "log-stock", "bundle"],
+    "homepage": "http://github.com/chEbba/LogStock",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kirill chEbba Chebunin",
+            "email": "iam@chebba.org"
+        }
+    ],
+
+    "version": "1.0.0-alpha",
+
+    "require": {
+        "php": ">=5.3.2",
+        "che/log-stock": "1.0.*,>=1.0.0-RC1",
+        "symfony/framework-bundle": "2.*"
+    },
+
+    "autoload": {
+        "psr-0": { "Che\\Bundle\\LogStockBundle": "src/" }
+    }
+}
