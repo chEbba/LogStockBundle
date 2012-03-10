@@ -20,7 +20,7 @@
 
     <services>
         <!-- Setup base services -->
-        <service id="log_stock.loader.hierarchy" class="%log_stock.loader.class%">
+        <service id="log_stock.loader.hierarchy" class="%log_stock.loader.hierarchy.class%">
             <argument type="service" id="log_stock.loader.hierarchy.child" />
             <argument>%log_stock.loader.hierarchy.separator%</argument>
         </service>
