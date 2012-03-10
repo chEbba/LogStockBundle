@@ -6,13 +6,13 @@
 
     <parameters>
         <parameter key="log_stock.loader.hierarchy.class">Che\LogStock\Loader\HierarchicalLoggerLoader</parameter>
+        <parameter key="log_stock.loader.hierarchy.separator">\</parameter>
         <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\SerivceLocatorLoader</parameter>
 
         <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\Containerlocator</parameter>
 
         <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerIdFormatter</parameter>
         <parameter key="log_stock.formatter.container.template">log_stock.logger.%s</parameter>
-        <parameter key="log_stock.formatter.container.separator">\</parameter>
 
         <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\MonologAdapter</parameter>
         <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
@@ -35,7 +35,7 @@
 
         <service id="log_stock.formatter.container" class="%log_stock.formatter.container.class%">
             <argument>%log_stock.formatter.container.template%</argument>
-            <argument>%log_stock.formatter.container.separator%</argument>
+            <argument>%log_stock.loader.hierarchy.separator%</argument>
         </service>
 
         <!-- Alias base services as default dependencies -->

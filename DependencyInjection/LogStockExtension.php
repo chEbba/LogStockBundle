@@ -140,7 +140,7 @@ class LogStockExtension extends Extension
         return ContainerIdFormatter::normalizeName(
             $name,
             $container->getParameter('log_stock.formatter.container.template'),
-            $container->getParameter('log_stock.formatter.container.separator')
+            $container->getParameter('log_stock.loader.hierarchy.separator')
         );
     }
 }
