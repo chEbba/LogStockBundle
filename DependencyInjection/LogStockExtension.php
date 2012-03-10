@@ -13,6 +13,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -80,7 +81,7 @@ class LogStockExtension extends Extension
         switch ($type) {
             case 'monolog':
                 $id = $adapter['id'] ?: 'logger'; // use default logger
-                $definition = new Definition($container->getParameter($class), array(new Reference($id)));
+                $definition = new Definition(new Parameter($class), array(new Reference($id)));
                 // If channel option is set, use it as tag for monolog bundle
                 if ($adapter['channel']) {
                     $definition->addTag('monolog.logger', array('channel' => $adapter['channel']));
@@ -89,7 +90,7 @@ class LogStockExtension extends Extension
                 return $adapterId;
 
             case 'system':
-                $definition = new Definition($class);
+                $definition = new Definition(new Parameter($class));
                 // If limit is set use it for levelLimit
                 if ($adapter['limit']) {
                     $definition->setArguments(array(constant('Che\LogStock\Logger::'.$adapter['limit'])));
