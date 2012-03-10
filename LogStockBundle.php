@@ -25,7 +25,10 @@ class LogStockBundle extends Bundle
     public function boot()
     {
         // Init loader from container
-        LoggerFactory::initLoader($this->container->get(LogStockExtension::ID_LOADER));
+        $loader = $this->container->get(LogStockExtension::ID_LOADER, ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        if ($loader) {
+            LoggerFactory::initLoader($loader);
+        }
 
         // Init root adapter if set
         $rootAdapter = $this->container->get(LogStockExtension::ID_ROOT, ContainerInterface::NULL_ON_INVALID_REFERENCE);
