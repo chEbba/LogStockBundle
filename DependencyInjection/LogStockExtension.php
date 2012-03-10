@@ -89,7 +89,12 @@ class LogStockExtension extends Extension
                 return $adapterId;
 
             case 'system':
-                $container->setDefinition($adapterId, new Definition($class, array($adapter['limit'])));
+                $definition = new Definition($class);
+                // If limit is set use it for levelLimit
+                if ($adapter['limit']) {
+                    $definition->setArguments(array(constant('Che\LogStock\Logger::'.$adapter['limit'])));
+                }
+                $container->setDefinition($adapterId, $definition);
                 return $adapterId;
 
             case 'custom':

@@ -52,6 +52,7 @@ class Configuration implements ConfigurationInterface
                             ->end()
                             ->scalarNode('id')->defaultNull()->end()
                             ->scalarNode('channel')->defaultNull()->end() // for the default monolog id
+                            ->scalarNode('limit')->defaultNull()->end() // level limit for SystemLoggerAdadpter
                         ->end()
                     ->end()
                 ->end()
