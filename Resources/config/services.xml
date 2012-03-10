@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="log_stock.loader.hierarchy.class">Che\LogStock\Loader\HierarchicalLoggerLoader</parameter>
         <parameter key="log_stock.loader.hierarchy.separator">\</parameter>
-        <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\SerivceLocatorLoader</parameter>
+        <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\ServiceLocatorLoader</parameter>
 
         <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\Containerlocator</parameter>
 
