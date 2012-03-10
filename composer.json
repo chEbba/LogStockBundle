@@ -21,6 +21,7 @@
     },
 
     "autoload": {
-        "psr-0": { "Che\\Bundle\\LogStockBundle": "src/" }
-    }
+        "psr-0": { "Che\\Bundle\\LogStockBundle": "" }
+    },
+    "target-dir": "Che/Bundle/LogStockBundle"
 }
