@@ -9,7 +9,7 @@
         <parameter key="log_stock.loader.hierarchy.separator">\</parameter>
         <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\ServiceLocatorLoader</parameter>
 
-        <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\Containerlocator</parameter>
+        <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerLocator</parameter>
 
         <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerIdFormatter</parameter>
         <parameter key="log_stock.formatter.container.template">log_stock.logger.%s</parameter>
