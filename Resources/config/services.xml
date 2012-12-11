@@ -9,39 +9,47 @@
         <parameter key="log_stock.loader.hierarchy.separator">\</parameter>
         <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\ServiceLocatorLoader</parameter>
 
-        <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerLocator</parameter>
+        <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\Loader\Container\ContainerLocator</parameter>
 
-        <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\DependencyInjection\ContainerIdFormatter</parameter>
+        <parameter key="log_stock.formatter.container.class">Che\Bundle\LogStockBundle\Loader\Container\ContainerIdFormatter</parameter>
         <parameter key="log_stock.formatter.container.template">log_stock.logger.%s</parameter>
 
         <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\Monolog\MonologAdapter</parameter>
         <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
+
+        <parameter key="log_stock.monolog.formatter.line.format">[%datetime%] [%channel%] [%extra.log_stock.name%] %level_name%: %message% %context% %extra%\n\n</parameter>
+        <parameter key="log_stock.monolog.formatter.line.date_format">Y-m-d H:i:s</parameter>
     </parameters>
 
     <services>
         <!-- Setup base services -->
-        <service id="log_stock.loader.hierarchy" class="%log_stock.loader.hierarchy.class%">
+        <service id="log_stock.loader.hierarchy" class="%log_stock.loader.hierarchy.class%" public="false">
             <argument type="service" id="log_stock.loader.hierarchy.child" />
             <argument>%log_stock.loader.hierarchy.separator%</argument>
         </service>
-        <service id="log_stock.loader.locator" class="%log_stock.loader.locator.class%">
+        <service id="log_stock.loader.locator" class="%log_stock.loader.locator.class%" public="false">
             <argument type="service" id="log_stock.loader.locator.container" />
             <argument type="service" id="log_stock.loader.locator.formatter" />
         </service>
 
-        <service id="log_stock.container.symfony" class="%log_stock.container.symfony.class%">
+        <service id="log_stock.container.symfony" class="%log_stock.container.symfony.class%" public="false">
             <argument type="service" id="service_container" />
         </service>
 
-        <service id="log_stock.formatter.container" class="%log_stock.formatter.container.class%">
+        <service id="log_stock.formatter.container" class="%log_stock.formatter.container.class%" public="false">
             <argument>%log_stock.formatter.container.template%</argument>
             <argument>%log_stock.loader.hierarchy.separator%</argument>
         </service>
 
+        <service id="log_stock.monolog.formatter.line" class="Monolog\Formatter\LineFormatter">
+            <argument>%log_stock.monolog.formatter.line.format%</argument>
+            <argument>%log_stock.monolog.formatter.line.date_format%</argument>
+        </service>
+
         <!-- Alias base services as default dependencies -->
         <service id="log_stock.loader" alias="log_stock.loader.hierarchy" />
-        <service id="log_stock.loader.hierarchy.child" alias="log_stock.loader.locator" />
-        <service id="log_stock.loader.locator.container" alias="log_stock.container.symfony" />
-        <service id="log_stock.loader.locator.formatter" alias="log_stock.formatter.container" />
+        <service id="log_stock.loader.hierarchy.child" alias="log_stock.loader.locator" public="false" />
+        <service id="log_stock.loader.locator.container" alias="log_stock.container.symfony" public="false" />
+        <service id="log_stock.loader.locator.formatter" alias="log_stock.formatter.container" public="false" />
     </services>
 </container>

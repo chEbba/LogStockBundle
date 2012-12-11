@@ -9,6 +9,8 @@
 
 namespace Che\Bundle\LogStockBundle\DependencyInjection;
 
+use Che\Bundle\LogStockBundle\Loader\Container\ContainerIdFormatter;
+
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -58,7 +60,7 @@ class LogStockExtension extends Extension
             $adapterId = $this->buildAdapter($container, $name, $adapter);
             // Alias adapter to logger
             foreach ($adapter['loggers'] as $logger) {
-                $container->setAlias($this->getLoggetId($container, $logger), $adapterId);
+                $container->setAlias($this->getLoggerId($container, $logger), $adapterId);
             }
         }
     }
@@ -114,7 +116,7 @@ class LogStockExtension extends Extension
      *
      * @param string $type
      *
-     * @return string Classname parameter
+     * @return string Class name parameter
      */
     private function getAdapterClassParameter($type)
     {
@@ -141,7 +143,7 @@ class LogStockExtension extends Extension
      *
      * @return string
      */
-    private function getLoggetId(ContainerBuilder $container, $name)
+    private function getLoggerId(ContainerBuilder $container, $name)
     {
         return ContainerIdFormatter::normalizeName(
             $name,

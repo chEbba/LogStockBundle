@@ -7,7 +7,7 @@
  * with this package in the file LICENSE.
  */
 
-namespace Che\Bundle\LogStockBundle\DependencyInjection;
+namespace Che\Bundle\LogStockBundle\Loader\Container;
 
 use Che\LogStock\Loader\Container\ServiceNameFormatter;
 
