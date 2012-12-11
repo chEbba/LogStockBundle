@@ -17,7 +17,7 @@
         <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\Monolog\MonologAdapter</parameter>
         <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
 
-        <parameter key="log_stock.monolog.formatter.line.format">[%datetime%] [%channel%] [%extra.log_stock.name%] %level_name%: %message% %context% %extra%\n\n</parameter>
+        <parameter key="log_stock.monolog.formatter.line.format">[%%datetime%%] [%%channel%%] [%%extra.log_stock.name%%] %%level_name%%: %%message%% %%context%% %%extra%%\n\n</parameter>
         <parameter key="log_stock.monolog.formatter.line.date_format">Y-m-d H:i:s</parameter>
     </parameters>
 
