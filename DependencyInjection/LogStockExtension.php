@@ -84,10 +84,9 @@ class LogStockExtension extends Extension
             case 'monolog':
                 $id = $adapter['id'] ?: 'logger'; // use default logger
                 $definition = new Definition(new Parameter($class), array(new Reference($id)));
-                // If channel option is set, use it as tag for monolog bundle
-                if ($adapter['channel']) {
-                    $definition->addTag('monolog.logger', array('channel' => $adapter['channel']));
-                }
+                // By default use channel with adapter name
+                $channel = $adapter['channel'] ?: $name;
+                $definition->addTag('monolog.logger', array('channel' => $channel));
                 $container->setDefinition($adapterId, $definition);
                 return $adapterId;
 
