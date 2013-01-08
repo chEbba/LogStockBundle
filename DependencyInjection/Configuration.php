@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('loader')->defaultNull()->end()
-                ->scalarNode('separator')->defaultNull()->end()
+                ->scalarNode('separator')->defaultValue('\\')->end() //log_stock.loader.hierarchy.separator
                 ->arrayNode('adapters')
                     ->fixXmlConfig('adapter')
                     ->useAttributeAsKey('name')
@@ -54,6 +54,17 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('channel')->defaultNull()->end() // channel for MonologAdapter type
                             ->scalarNode('limit')->defaultNull()->end() // level limit for SystemLoggerAdadpter
                         ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('formatter')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        //log_stock.monolog.formatter.format
+                        ->scalarNode('format')
+                            ->defaultValue("[%%datetime%%] [%%channel%%] [%%extra.log_stock.name%%] %%level_name%%: %%message%% %%context%% %%extra%%\n")
+                        ->end()
+                        //log_stock.monolog.formatter.date_format
+                        ->scalarNode('date_format')->defaultValue('Y-m-d H:i:s')->end()
                     ->end()
                 ->end()
             ->end()

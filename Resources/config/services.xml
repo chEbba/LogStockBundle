@@ -6,7 +6,6 @@
 
     <parameters>
         <parameter key="log_stock.loader.hierarchy.class">Che\LogStock\Loader\HierarchicalLoggerLoader</parameter>
-        <parameter key="log_stock.loader.hierarchy.separator">\</parameter>
         <parameter key="log_stock.loader.locator.class">Che\LogStock\Loader\ServiceLocatorLoader</parameter>
 
         <parameter key="log_stock.container.symfony.class">Che\Bundle\LogStockBundle\Loader\Container\ContainerLocator</parameter>
@@ -17,10 +16,6 @@
         <parameter key="log_stock.adapter.monolog.class">Che\LogStock\Adapter\Monolog\MonologAdapter</parameter>
         <parameter key="log_stock.adapter.system.class">Che\LogStock\Adapter\SystemLoggerAdapter</parameter>
 
-        <parameter key="log_stock.monolog.formatter.line.format"><![CDATA[[%%datetime%%] [%%channel%%] [%%extra.log_stock.name%%] %%level_name%%: %%message%% %%context%% %%extra%%
-
-]]></parameter>
-        <parameter key="log_stock.monolog.formatter.line.date_format">Y-m-d H:i:s</parameter>
     </parameters>
 
     <services>
@@ -43,9 +38,9 @@
             <argument>%log_stock.loader.hierarchy.separator%</argument>
         </service>
 
-        <service id="log_stock.monolog.formatter.line" class="Monolog\Formatter\LineFormatter">
-            <argument>%log_stock.monolog.formatter.line.format%</argument>
-            <argument>%log_stock.monolog.formatter.line.date_format%</argument>
+        <service id="log_stock.monolog.formatter" class="Monolog\Formatter\LineFormatter">
+            <argument>%log_stock.monolog.formatter.format%</argument>
+            <argument>%log_stock.monolog.formatter.date_format%</argument>
         </service>
 
         <service id="log_stock.monolog.processor.name" class="Che\LogStock\Adapter\Monolog\NameProcessor">

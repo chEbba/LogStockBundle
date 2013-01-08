@@ -50,9 +50,11 @@ class LogStockExtension extends Extension
         }
 
         // Change default separator
-        if ($separator = $config['separator']) {
-            $container->setParameter('log_stock.loader.hierarchy.separator', $separator);
-        }
+        $container->setParameter('log_stock.loader.hierarchy.separator', $config['separator']);
+
+        // Set formatter options
+        $container->setParameter('log_stock.monolog.formatter.format', $config['formatter']['format']);
+        $container->setParameter('log_stock.monolog.formatter.date_format', $config['formatter']['date_format']);
 
         // Configure adapters and logger mapping
         foreach ($config['adapters'] as $name => $adapter) {
