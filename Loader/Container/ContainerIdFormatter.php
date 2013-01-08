@@ -52,7 +52,7 @@ class ContainerIdFormatter implements ServiceNameFormatter
     static public function normalizeName($name, $template = '%s', $separator = '')
     {
         // Replace separator with Symfony default ('.') and apply template
-        return sprintf($template, strtolower($separator ? str_replace($separator, '.', $name) : $name));
+        return trim(sprintf($template, strtolower($separator ? str_replace($separator, '.', $name) : $name)), '.');
     }
 
     public function formatServiceName($name)
