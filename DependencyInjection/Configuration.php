@@ -40,10 +40,10 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('type')
-                                ->isRequired()
-                                ->beforeNormalization()
-                                    ->always()
-                                    ->then(function($v) { return strtolower($v); })
+                                ->defaultValue('monolog')
+                                ->validate()
+                                ->ifNotInArray(array('monolog', 'system', 'custom'))
+                                    ->thenInvalid('Invalid monolog adapter type "%s"')
                                 ->end()
                             ->end()
                             ->arrayNode('loggers')
@@ -51,7 +51,7 @@ class Configuration implements ConfigurationInterface
                                 ->prototype('scalar')->end()
                             ->end()
                             ->scalarNode('id')->defaultNull()->end()
-                            ->scalarNode('channel')->defaultNull()->end() // for the default monolog id
+                            ->scalarNode('channel')->defaultNull()->end() // channel for MonologAdapter type
                             ->scalarNode('limit')->defaultNull()->end() // level limit for SystemLoggerAdadpter
                         ->end()
                     ->end()
